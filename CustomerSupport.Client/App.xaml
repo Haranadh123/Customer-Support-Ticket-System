@@ -1,0 +1,10 @@
+<Application x:Class="CustomerSupport.Client.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:CustomerSupport.Client"
+             xmlns:converters="clr-namespace:CustomerSupport.Client.Converters"
+             StartupUri="LoginWindow.xaml">
+    <Application.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Application.Resources>
+</Application>

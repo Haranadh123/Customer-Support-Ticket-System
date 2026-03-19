@@ -1,0 +1,27 @@
+<Window x:Class="CustomerSupport.Client.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Customer Support System - Login" Height="350" Width="400"
+        WindowStartupLocation="CenterScreen" Background="#F0F2F5">
+    <Grid>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
+            <TextBlock Text="Support Ticket System" FontSize="24" FontWeight="Bold" Margin="0,0,0,20" HorizontalAlignment="Center" Foreground="#1C1E21"/>
+            
+            <TextBlock Text="Username" Margin="0,0,0,5"/>
+            <TextBox Name="TxtUsername" Height="35" Margin="0,0,0,15" VerticalContentAlignment="Center" Padding="5,0"/>
+            
+            <TextBlock Text="Password" Margin="0,0,0,5"/>
+            <PasswordBox Name="TxtPassword" Height="35" Margin="0,0,0,20" VerticalContentAlignment="Center" Padding="5,0"/>
+            
+            <Button Content="Login" Height="40" Background="#1877F2" Foreground="White" FontWeight="Bold" Click="BtnLogin_Click" BorderThickness="0">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            
+            <TextBlock Name="LblError" Foreground="Red" Margin="0,15,0,0" TextAlignment="Center" Visibility="Collapsed"/>
+        </StackPanel>
+    </Grid>
+</Window>

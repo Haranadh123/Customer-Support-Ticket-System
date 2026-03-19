@@ -1,0 +1,51 @@
+<Window x:Class="CustomerSupport.Client.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Customer Support System - Dashboard" Height="600" Width="1000"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="0" Margin="10" LastChildFill="False">
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                <TextBlock Text="Support Tickets" FontSize="20" FontWeight="Bold" VerticalAlignment="Center"/>
+                <TextBlock Name="LblUserRole" FontSize="14" Foreground="Gray" Margin="10,0,0,0" VerticalAlignment="Center"/>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                <Button Content="New Ticket" Name="BtnNewTicket" Width="100" Height="30" Margin="0,0,10,0" Click="BtnNewTicket_Click"/>
+                <Button Content="Refresh" Name="BtnRefresh" Width="80" Height="30" Click="BtnRefresh_Click"/>
+                <Button Content="Logout" Name="BtnLogout" Width="80" Height="30" Margin="10,0,0,0" Click="BtnLogout_Click" Background="#FFEEF2" Foreground="#DC3545" FontWeight="Medium" BorderBrush="#DC3545"/>
+            </StackPanel>
+        </DockPanel>
+
+        <DataGrid Grid.Row="1" Name="DgTickets" AutoGenerateColumns="False" IsReadOnly="True" Margin="10" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="#" Binding="{Binding TicketNumber}" Width="120"/>
+                <DataGridTextColumn Header="Subject" Binding="{Binding Subject}" Width="*"/>
+                <DataGridTextColumn Header="Priority" Binding="{Binding Priority}" Width="80"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="100"/>
+                <DataGridTextColumn Header="Created Date" Binding="{Binding CreatedDate, StringFormat=\{0:yyyy-MM-dd HH:mm\}}" Width="140"/>
+                <DataGridTextColumn Header="Assigned To" Binding="{Binding AssignedToUsername}" Width="120"/>
+                <DataGridTemplateColumn Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="View Details" Click="BtnViewDetails_Click" Margin="2"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StatusBar Grid.Row="2">
+            <TextBlock Name="StatusText" Text="Ready"/>
+        </StatusBar>
+    </Grid>
+</Window>
