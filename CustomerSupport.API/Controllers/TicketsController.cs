@@ -133,6 +133,9 @@ public class TicketsController : ControllerBase
         _context.Tickets.Add(ticket);
         await _context.SaveChangesAsync();
 
+        var user = await _context.Users.FindAsync(userId);
+        var username = user?.Username ?? "Unknown";
+
         return CreatedAtAction(nameof(GetTicketDetails), new { id = ticket.Id }, new TicketDto(
             ticket.Id,
             ticket.TicketNumber,
@@ -141,7 +144,7 @@ public class TicketsController : ControllerBase
             ticket.Priority,
             ticket.Status,
             ticket.CreatedDate,
-            ticket.CreatedBy!.Username,
+            username,
             null,
             null
         ));
@@ -187,11 +190,11 @@ public class TicketsController : ControllerBase
 
     [Authorize(Roles = "Admin")]
     [HttpGet("admins")]
-    public async Task<ActionResult<IEnumerable<User>>> GetAdmins()
+    public async Task<ActionResult<IEnumerable<AdminDto>>> GetAdmins()
     {
         var admins = await _context.Users
             .Where(u => u.Role == UserRole.Admin)
-            .Select(u => new { u.Id, u.Username })
+            .Select(u => new AdminDto(u.Id, u.Username))
             .ToListAsync();
         return Ok(admins);
     }
