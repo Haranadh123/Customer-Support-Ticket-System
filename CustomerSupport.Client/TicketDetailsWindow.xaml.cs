@@ -15,6 +15,8 @@ public partial class TicketDetailsWindow : Window
     private readonly ApiService _apiService;
     private TicketDetailsDto? _details;
 
+    private Task? _loadAdminsTask;
+
     public TicketDetailsWindow(int ticketId, LoginResponse loginInfo, ApiService apiService)
     {
         InitializeComponent();
@@ -26,7 +28,7 @@ public partial class TicketDetailsWindow : Window
         {
             BrdrAdminActions.Visibility = Visibility.Visible;
             ChkInternal.Visibility = Visibility.Visible;
-            LoadAdmins();
+            _loadAdminsTask = LoadAdmins();
         }
 
         LoadDetails();
@@ -80,6 +82,12 @@ public partial class TicketDetailsWindow : Window
                         break;
                     }
                 }
+
+                if (_loadAdminsTask != null)
+                {
+                    await _loadAdminsTask;
+                    CbAssignTo.SelectedValue = t.AssignedToAdminId;
+                }
             }
 
             // Disable comment if closed and not admin
@@ -97,7 +105,7 @@ public partial class TicketDetailsWindow : Window
         }
     }
 
-    private async void LoadAdmins()
+    private async Task LoadAdmins()
     {
         try
         {

@@ -16,7 +16,8 @@ public record TicketDto(
     TicketStatus Status,
     DateTime CreatedDate,
     string CreatedByUsername,
-    string? AssignedToUsername
+    string? AssignedToUsername,
+    int? AssignedToAdminId
 );
 
 public record CommentDto(

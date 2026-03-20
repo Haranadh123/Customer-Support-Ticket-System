@@ -63,7 +63,8 @@ public class TicketsController : ControllerBase
                 t.Status,
                 t.CreatedDate,
                 t.CreatedBy?.Username ?? "Unknown",
-                t.AssignedTo?.Username
+                t.AssignedTo?.Username,
+                t.AssignedToAdminId
             ))
             .ToList();
 
@@ -95,7 +96,8 @@ public class TicketsController : ControllerBase
             ticket.Status,
             ticket.CreatedDate,
             ticket.CreatedBy!.Username,
-            ticket.AssignedTo?.Username
+            ticket.AssignedTo?.Username,
+            ticket.AssignedToAdminId
         );
 
         var comments = ticket.Comments
@@ -139,7 +141,8 @@ public class TicketsController : ControllerBase
             ticket.Priority,
             ticket.Status,
             ticket.CreatedDate,
-            User.Identity!.Name!,
+            ticket.CreatedBy!.Username,
+            null,
             null
         ));
     }
